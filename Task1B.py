@@ -7,10 +7,10 @@ def run():
     cam_city_centre_coords = (52.2053, 0.1218)
     sorted_stations = [(i.name, i.town, d) for (i,d) in stations_by_distance(stations, cam_city_centre_coords)]
     print("Closest 10 stations: ")
-    print(*sorted_stations[:10])
+    print(sorted_stations[:10])
     print()
     print("Furthest 10 stations: ")
-    print(*sorted_stations[-10:])
+    print(sorted_stations[-10:])
 
 
 if __name__ == "__main__":
