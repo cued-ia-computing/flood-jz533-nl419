@@ -26,7 +26,7 @@ def stations_by_distance(stations, p):
 
 def stations_within_radius(stations, centre, r):
     """Get list of stations within radius r of centre
-    returns a list of all stations (type MonitoringStation) 
+    returns a list of all stations (type MonitoringStation)
     within radius "r" of a geographic coordinate "centre"
     """
 
