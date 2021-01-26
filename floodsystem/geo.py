@@ -21,3 +21,11 @@ def stations_by_distance(stations, p):
     # Create list of tuples of (station, distance)
     station_distance = [(stations[i], haversine(stations[i].coord,p)) for i in range(len(stations))]
     return sorted_by_key(station_distance, 1)
+
+def stations_within_radius(stations, centre, r):
+    """Get list of stations within radius r of centre
+    returns a list of all stations (type MonitoringStation) 
+    within radius "r" of a geographic coordinate "centre"
+    """
+
+    return [i for i in stations if haversine(i.coord, centre) <= r]
