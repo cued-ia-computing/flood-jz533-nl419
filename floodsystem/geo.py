@@ -26,8 +26,29 @@ def stations_by_distance(stations, p):
 
 def stations_within_radius(stations, centre, r):
     """Get list of stations within radius r of centre
-    returns a list of all stations (type MonitoringStation)
+    Returns a list of all stations (type MonitoringStation)
     within radius "r" of a geographic coordinate "centre"
     """
 
     return [i for i in stations if haversine(i.coord, centre) <= r]
+
+
+def rivers_with_station(stations):
+    """Get all rivers that have a station
+    Returns set of rivers (string)
+    """
+
+    list_of_rivers = [i.river for i in stations]
+    return set(list_of_rivers)
+
+
+def stations_by_river(stations):
+    """Map river names to a list of station objects on a given river
+    Returns dictionary with format {river_name: [station1, station2, ...]}
+    """
+
+    river_dictionary = {}
+
+    for i in stations:
+        river_dictionary.setdefault(i.river, []).append(i)
+    return river_dictionary
