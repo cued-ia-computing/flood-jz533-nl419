@@ -52,3 +52,19 @@ def stations_by_river(stations):
     for i in stations:
         river_dictionary.setdefault(i.river, []).append(i)
     return river_dictionary
+
+
+def rivers_by_station_number(stations, N):
+    """Determine the N rivers with the greatest number of monitoring stations
+    """
+    river_dic = stations_by_river(stations)
+    # Sort rivers by how many stations they have (in descending order)
+    sorted_rivers = sorted_by_key([(river, len(station_list)) for (river, station_list) in river_dic.items()], 1, True)
+    # Don't know how to make this more efficient, so here goes.
+    sliced_rivers = sorted_rivers[:N]
+    counter = N
+    # While the last element of sliced_rivers has same number of stations as next item in sorted_rivers
+    while sliced_rivers[-1][1] == sorted_rivers[counter][1]:
+        sliced_rivers.append(sorted_rivers[counter])
+        counter += 1
+    return sliced_rivers
