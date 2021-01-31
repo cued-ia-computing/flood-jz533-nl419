@@ -37,4 +37,4 @@ def test_inconsistent_typical_range_stations():
     stations = [s1, s2, s3]
     inconsistent_stations = inconsistent_typical_range_stations(stations)
 
-    assert inconsistent_stations == ["B station", "C station"]
+    assert inconsistent_stations == [s1, s2]
