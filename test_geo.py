@@ -49,4 +49,4 @@ def test_stations_by_river():
     s3 = MonitoringStation("s_id3", "m_id3", "C station", (1.0, 3.0), (3.0, 2.0), "r3", "t3")
     stations = [s1, s2, s3]
 
-    assert stations_by_river(stations) == {'r1': s1, 'r2': s2, 'r3': s3}
+    assert stations_by_river(stations) == {'r1': [s1], 'r2': [s2], 'r3': [s3]}
