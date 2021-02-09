@@ -22,7 +22,8 @@ def test_stations_within_radius():
     # Create stations
     s1 = MonitoringStation("s_id1", "m_id1", "A station", (0.0, 1.0), (1.0, 2.0), "r1", "t1")
     s2 = MonitoringStation("s_id2", "m_id2", "B station", (0.0, 3.0), (0.0, 2.0), "r2", "t2")
-    stations = [s1, s2]
+    s3 = MonitoringStation("s_id3", "m_id3", "C station", (0.0, 2.0), (3.0, 2.0), "r3", "t3")
+    stations = [s1, s2, s3]
     station_within_radius = stations_within_radius(stations, (0.0, 0.0), 2)
 
-    assert station_within_radius == [s1]
+    assert station_within_radius == [s1, s3]
