@@ -1,8 +1,6 @@
 from floodsystem.stationdata import build_station_list
 from floodsystem.stationdata import update_water_levels
 from floodsystem.flood import risk, riskDict
-# from floodsystem.plot import plot_water_level_with_fit
-# from floodsystem.geo import stations_by_river
 
 
 def run():
@@ -14,23 +12,24 @@ def run():
                      and i.relative_water_level() > rel_level_threshold]
     print("Number of stations: {}".format(len(stations)))
     print("Number of high stations: {}".format(len(high_stations)))
+    print("Determining risk levels. Please wait.")
+    print("Depending on internet speed and cache availability, this may take up to 30 seconds...")
 
-    # debug code to check specific rivers' risk levels
-    # river_dic = stations_by_river(stations)
-    # for i in river_dic["River Hull"]:
-    for i in high_stations:
-        if i is None:
-            continue
-        if i.typical_range is None:
-            continue
-        print(i.name)
-        print(riskDict[risk(i)])
-        print()
-        # Debug code for specific stations
-        # if i.name in ["Clifford Bridge"]:
-        #     dt = 6
-        #     dates, levels = fetch_measure_levels(i.measure_id, dt=datetime.timedelta(days=dt))
-        #     plot_water_level_with_fit(i, dates, levels, 3, 1)
+    town_risk_level = [(riskDict[risk(station)], station.town) for station in high_stations
+                       if station.typical_range is not None and station.town is not None]
+
+    town_risk_dict = {"Low": [], "Moderate": [], "High": [], "Severe": []}
+    for tup in town_risk_level:
+        town_risk_dict[tup[0]].append(tup[1])
+
+    print("If the town is not included in any of the following lists, it either")
+    print("\t1) does not have a nearby monitoring station with a valid output, or")
+    print("\t2) is at low risk of flooding.\n")
+    print("Low risk: \n{}.\n".format(", ".join(town_risk_dict["Low"])))
+    print("Moderate risk: \n{}.\n".format(", ".join(town_risk_dict["Moderate"])))
+    print("High risk: \n{}.\n".format(", ".join(town_risk_dict["High"])))
+    print("Severe risk: \n{}.\n".format(", ".join(town_risk_dict["Severe"])))
+    print("End of risk levels.")
 
 
 if __name__ == "__main__":
