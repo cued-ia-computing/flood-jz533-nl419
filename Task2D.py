@@ -15,6 +15,7 @@ def run():
 
     # Station name to find
     station_name = "Cam"
+    # station_name = "Waltham Abbey, Sewardstone Road"  # Station to test
 
     # Find station
     station_cam = None
